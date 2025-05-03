@@ -20,3 +20,17 @@ router.post('/create-order', async (req, res) => {
       res.status(400).send({ error: error.message });
     }
   });
+
+  router.put('/update-order/:orderId', async (req, res) => {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    try {
+      const orderRef = db.collection('deliveries').doc(orderId);
+      await orderRef.update({ status }); // Update the status of the order
+      res.status(200).send({ message: 'Order status updated' });
+    } catch (error) {
+      res.status(400).send({ error: error.message });
+    }
+  });
+  
+  module.exports = router;
