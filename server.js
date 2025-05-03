@@ -1,13 +1,18 @@
 const express = require('express');
-const { db, auth } = require('./firebaseConfig');  // Firebase connection
-const dotenv = require('dotenv');  // Load environment variables from .env
+const { db, auth } = require('./firebaseConfig'); // Firebase connection
+const dotenv = require('dotenv'); 
+const userRoutes = require('./routes/userRoutes');  // Import User Routes
+const deliveryRoutes = require('./routes/deliveryRoutes');  // Import Delivery 
 
 dotenv.config();  // Load environment variables
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(express.json());  // Middleware to parse incoming JSON requests
+app.use(express.json());
+app.use('/api/users', userRoutes); // Use User Routes
+app.use('/api/deliveries', deliveryRoutes);
+
 
 app.get('/', (req, res) => {
   res.send('Delivery Management API is running');
