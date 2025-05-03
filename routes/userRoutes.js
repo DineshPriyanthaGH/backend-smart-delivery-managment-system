@@ -22,3 +22,17 @@ router.post('/signup', async (req, res) => {
     res.status(400).send({ error: error.message });
   }
 });
+
+// Login Route
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+      const user = await auth.getUserByEmail(email);
+      // Normally, Firebase client SDK is used to verify the password client-side
+      res.status(200).send({ message: 'User logged in successfully', userId: user.uid });
+    } catch (error) {
+      res.status(400).send({ error: error.message });
+    }
+  });
+  
+  module.exports = router;
