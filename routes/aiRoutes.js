@@ -19,3 +19,25 @@ router.post('/predict-delivery-time', async (req, res) => {
       res.status(400).send({ error: error.message });
     }
   });
+
+  async function predictDeliveryTime(start, end) {
+    return new Promise((resolve, reject) => {
+      googleMaps.distanceMatrix(
+        {
+          origins: [start],
+          destinations: [end],
+          mode: 'driving',
+        },
+        (err, response) => {
+            if (err) {
+              reject('Error with Google Maps API: ' + err);
+            } else {
+                const duration = response.json.rows[0].elements[0].duration.text;
+                resolve(duration);  
+              }
+            }
+          );
+        });
+      }
+      
+      module.exports = router;
