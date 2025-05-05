@@ -27,6 +27,7 @@ router.post('/predict-delivery-time', async (req, res) => {
           origins: [start],
           destinations: [end],
           mode: 'driving',
+          traffic_model: 'best_guess', 
         },
         (err, response) => {
             if (err) {
