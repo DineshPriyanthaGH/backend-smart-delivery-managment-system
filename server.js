@@ -2,7 +2,8 @@ const express = require('express');
 const { db, auth } = require('./firebaseConfig'); // Firebase connection
 const dotenv = require('dotenv'); 
 const userRoutes = require('./routes/userRoutes');  // Import User Routes
-const deliveryRoutes = require('./routes/deliveryRoutes');  // Import Delivery 
+const deliveryRoutes = require('./routes/deliveryRoutes');  // Import Delivery
+const aiRoutes = require('./routes/aiRoutes'); // Import AI Routes 
 
 dotenv.config();  // Load environment variables
 
