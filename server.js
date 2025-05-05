@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use('/api/users', userRoutes); // Use User Routes
 app.use('/api/deliveries', deliveryRoutes);
-
+app.use('/api/ai', aiRoutes);
 
 app.get('/', (req, res) => {
   res.send('Delivery Management API is running');
