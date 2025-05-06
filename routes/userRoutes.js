@@ -1,9 +1,9 @@
 const express = require('express');
 const { auth, db } = require('../firebaseConfig');  // Firebase connection
-
+const admin = require('firebase-admin');  // Add this line
 const router = express.Router();
 
-//signup route
+// Signup Route
 router.post('/signup', async (req, res) => {
   const { email, password, name, role } = req.body;
   try {
@@ -14,7 +14,7 @@ router.post('/signup', async (req, res) => {
       name,
       email,
       role,  // customer or driver
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      createdAt: admin.firestore.FieldValue.serverTimestamp(), // Corrected line
     });
     
     res.status(200).send({ message: 'User created successfully', userId: userRecord.uid });
@@ -33,6 +33,6 @@ router.post('/login', async (req, res) => {
     } catch (error) {
       res.status(400).send({ error: error.message });
     }
-  });
-  
-  module.exports = router;
+});
+
+module.exports = router;
